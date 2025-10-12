@@ -1,0 +1,109 @@
+state,month,month_name,turnover
+Australian Capital Territory,1,January,293.9674418604651
+Australian Capital Territory,2,February,277.39767441860465
+Australian Capital Territory,3,March,306.75581395348837
+Australian Capital Territory,4,April,292.32272727272726
+Australian Capital Territory,5,May,303.45909090909095
+Australian Capital Territory,6,June,298.62045454545455
+Australian Capital Territory,7,July,292.71162790697673
+Australian Capital Territory,8,August,290.0
+Australian Capital Territory,9,September,289.1209302325582
+Australian Capital Territory,10,October,306.4046511627907
+Australian Capital Territory,11,November,321.84186046511627
+Australian Capital Territory,12,December,392.3790697674418
+New South Wales,1,January,5178.827906976744
+New South Wales,2,February,4710.276744186046
+New South Wales,3,March,5183.3
+New South Wales,4,April,4951.372727272727
+New South Wales,5,May,5166.281818181818
+New South Wales,6,June,5057.604545454546
+New South Wales,7,July,4975.188372093024
+New South Wales,8,August,4985.516279069768
+New South Wales,9,September,5032.148837209302
+New South Wales,10,October,5301.746511627907
+New South Wales,11,November,5570.73488372093
+New South Wales,12,December,6876.360465116279
+Northern Territory,1,January,163.4189189189189
+Northern Territory,2,February,156.35945945945946
+Northern Territory,3,March,175.23513513513512
+Northern Territory,4,April,170.77894736842106
+Northern Territory,5,May,182.70000000000002
+Northern Territory,6,June,187.94473684210524
+Northern Territory,7,July,196.2972972972973
+Northern Territory,8,August,194.8864864864865
+Northern Territory,9,September,185.31351351351353
+Northern Territory,10,October,186.4918918918919
+Northern Territory,11,November,182.45135135135135
+Northern Territory,12,December,203.27027027027026
+Queensland,1,January,3201.7023255813956
+Queensland,2,February,2856.3325581395347
+Queensland,3,March,3150.213953488372
+Queensland,4,April,3004.156818181818
+Queensland,5,May,3129.8295454545455
+Queensland,6,June,3121.765909090909
+Queensland,7,July,3148.9441860465117
+Queensland,8,August,3146.7302325581395
+Queensland,9,September,3143.6209302325583
+Queensland,10,October,3257.2023255813956
+Queensland,11,November,3339.741860465116
+Queensland,12,December,4072.6674418604653
+South Australia,1,January,1097.853488372093
+South Australia,2,February,998.6232558139535
+South Australia,3,March,1116.1232558139536
+South Australia,4,April,1061.5954545454545
+South Australia,5,May,1102.3113636363635
+South Australia,6,June,1074.1204545454545
+South Australia,7,July,1070.9488372093024
+South Australia,8,August,1069.639534883721
+South Australia,9,September,1066.8093023255815
+South Australia,10,October,1126.706976744186
+South Australia,11,November,1172.1813953488372
+South Australia,12,December,1436.853488372093
+Tasmania,1,January,342.77906976744185
+Tasmania,2,February,318.21627906976744
+Tasmania,3,March,346.47441860465113
+Tasmania,4,April,325.65227272727276
+Tasmania,5,May,334.2386363636364
+Tasmania,6,June,325.61136363636365
+Tasmania,7,July,326.5348837209302
+Tasmania,8,August,325.39069767441856
+Tasmania,9,September,323.09302325581393
+Tasmania,10,October,341.62558139534883
+Tasmania,11,November,358.4186046511628
+Tasmania,12,December,445.19534883720934
+Total (State),1,January,16057.723255813953
+Total (State),2,February,14608.602325581396
+Total (State),3,March,16148.167441860463
+Total (State),4,April,15392.118181818181
+Total (State),5,May,16010.436363636363
+Total (State),6,June,15739.884090909092
+Total (State),7,July,15587.483720930233
+Total (State),8,August,15592.997674418606
+Total (State),9,September,15599.988372093023
+Total (State),10,October,16421.437209302327
+Total (State),11,November,17163.072093023256
+Total (State),12,December,21114.13488372093
+Victoria,1,January,4048.146511627907
+Victoria,2,February,3709.2906976744184
+Victoria,3,March,4124.088372093023
+Victoria,4,April,3926.459090909091
+Victoria,5,May,4056.4613636363633
+Victoria,6,June,3976.925
+Victoria,7,July,3893.4441860465117
+Victoria,8,August,3891.9697674418608
+Victoria,9,September,3872.695348837209
+Victoria,10,October,4112.711627906977
+Victoria,11,November,4372.823255813953
+Victoria,12,December,5427.890697674418
+Western Australia,1,January,1748.8255813953488
+Western Australia,2,February,1598.8860465116281
+Western Australia,3,March,1764.9813953488372
+Western Australia,4,April,1678.2204545454545
+Western Australia,5,May,1754.6136363636363
+Western Australia,6,June,1717.7454545454545
+Western Australia,7,July,1705.0697674418604
+Western Australia,8,August,1710.4581395348837
+Western Australia,9,September,1707.5116279069769
+Western Australia,10,October,1808.8279069767443
+Western Australia,11,November,1864.83488372093
+Western Australia,12,December,2281.1279069767443
