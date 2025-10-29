@@ -54,11 +54,13 @@
             <h2>Australia SA4 Unemployment Rate Map (June 2025)</h2>
             <div id="viz9"></div>
         </section>
-
-                <section class="viz-section half-width">
-            <h2>Retail vs Unemployment Relationship</h2>
-            <div id="viz7"></div>
+        
+        <!-- Row 5: Top 10 Industries -->
+        <section class="viz-section full-width">
+            <h2>Top 10 Industries by Turnover (Latest Month)</h2>
+            <div id="viz8"></div>
         </section>
+
 
 
 
@@ -90,7 +92,24 @@
         vegaEmbed('#viz5', spec5, {actions: false});
         vegaEmbed('#viz6', spec6, {actions: false});
         vegaEmbed('#viz7', spec7, {actions: false});
-        vegaEmbed('#viz9', spec9, {actions: false});
+        vegaEmbed('#viz9', spec9, {actions: false}).then(function(result) {
+            // Move parameter controls to bottom after embedding
+            const vizContainer = document.getElementById('viz9');
+            const bindContainer = vizContainer.querySelector('.vega-bind');
+            if (bindContainer) {
+                bindContainer.style.position = 'relative';
+                bindContainer.style.order = '2';
+                bindContainer.style.marginTop = '1rem';
+                bindContainer.style.display = 'flex';
+                bindContainer.style.justifyContent = 'center';
+                vizContainer.style.display = 'flex';
+                vizContainer.style.flexDirection = 'column';
+                const chartContainer = vizContainer.querySelector('.vega-embed');
+                if (chartContainer) {
+                    chartContainer.style.order = '1';
+                }
+            }
+        });
         vegaEmbed('#viz8', spec8, {actions: false});
     </script>
 </body>
