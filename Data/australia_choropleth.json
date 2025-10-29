@@ -1,0 +1,174 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 600,
+  "title": "Australia SA4 Unemployment Rate (June 2025)",
+  "projection": {
+    "type": "mercator",
+    "center": [135, -28],
+    "scale": 800
+  },
+  "params": [
+    {
+      "name": "Rating_selection",
+      "value": null,
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "Poor",
+          "Below average",
+          "Average",
+          "Above average",
+          "Strong"
+        ],
+        "labels": [
+          "Show All",
+          "Poor",
+          "Below average",
+          "Average",
+          "Above average",
+          "Strong"
+        ],
+        "name": "Rating Filter: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "data/australia_regions.json",
+        "format": {
+          "type": "topojson",
+          "feature": "SA4_2021_AUST_GDA2020"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "gray",
+        "stroke": "white",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "tooltip": [{
+          "field": "properties.SA4_NAME21",
+          "type": "nominal",
+          "title": "Region (No Data)"
+        }]
+      }
+    },
+    {
+      "data": {
+        "url": "data/australia_regions.json",
+        "format": {
+          "type": "topojson",
+          "feature": "SA4_2021_AUST_GDA2020"
+        }
+      },
+      "transform": [
+        {
+          "lookup": "properties.SA4_CODE21",
+          "from": {
+            "data": {
+              "url": "data/LabourMarketRatingsUnemploymentRates_clean.csv"
+            },
+            "key": "SA4 Code",
+            "fields": [
+              "Statistical Area Level 4 (SA4)",
+              "Rating",
+              "Working Age Employment Rate (%)",
+              "Unemployment Rate (%)"
+            ]
+          }
+        },
+        {
+          "filter": "datum['Unemployment Rate (%)'] != null"
+        },
+        {
+          "filter": "Rating_selection == null || datum.Rating == Rating_selection"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "white",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "color": {
+          "field": "Unemployment Rate (%)",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [3.0, 4.0, 5.0],
+            "range": ["#fff5f0", "#fee0d2", "#fcbba1", "#fc9272"]
+          },
+          "legend": {
+            "title": "Unemployment Rate (%)",
+            "format": ".1f"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Statistical Area Level 4 (SA4)",
+            "type": "nominal",
+            "title": "Region"
+          },
+          {
+            "field": "Unemployment Rate (%)",
+            "type": "quantitative",
+            "title": "Unemployment Rate (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "Working Age Employment Rate (%)",
+            "type": "quantitative",
+            "title": "Employment Rate (%)",
+            "format": ".1f"
+          },
+          {
+            "field": "Rating",
+            "type": "nominal",
+            "title": "Labour Market Rating"
+          }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/LabourMarketRatingsUnemploymentRates_clean.csv"
+      },
+      "transform": [
+        {
+          "filter": "Rating_selection == null || datum.Rating == Rating_selection"
+        },
+        {
+          "filter": "datum['Unemployment Rate (%)'] != null"
+        },
+        {
+          "window": [{"op": "rank", "as": "ranking"}],
+          "sort": [{"field": "Unemployment Rate (%)", "order": "descending"}]
+        },
+        {"filter": "datum.ranking == 1"},
+        {
+          "calculate": "'Highest Unemployment: ' + datum['Statistical Area Level 4 (SA4)'] + ' (' + datum['Unemployment Rate (%)'] + '%)'",
+          "as": "text_annotation"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "top",
+        "dx": 10,
+        "dy": 10,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#cb181d"
+      },
+      "encoding": {
+        "text": {"field": "text_annotation", "type": "nominal"},
+        "x": {"value": 10},
+        "y": {"value": 10}
+      }
+    }
+  ]
+}
