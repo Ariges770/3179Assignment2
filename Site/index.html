@@ -7,6 +7,15 @@
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <script src="json/spec1.js"></script>
+    <script src="json/spec2.js"></script>
+    <script src="json/spec3.js"></script>
+    <script src="json/spec4.js"></script>
+    <script src="json/spec5.js"></script>
+    <script src="json/spec6.js"></script>
+    <script src="json/spec7.js"></script>
+    <script src="json/spec8.js"></script>
+    <script src="json/spec9.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -27,30 +36,12 @@
             <h2>Year-over-Year Growth Rate</h2>
             <div id="viz2"></div>
         </section>
-        <!-- <section class="viz-section half-width">
-            <h2>Top Industries by State</h2>
-            <div id="viz3"></div>
-        </section> -->
 
         <!-- Row 3: Seasonality + Unemployment Map -->
         <section class="viz-section half-width">
             <h2>Monthly Seasonality Pattern</h2>
             <div id="viz4"></div>
         </section>
-        <!-- <section class="viz-section half-width">
-            <h2>Unemployment Rate by SA4 Region (Use geographic map)</h2>
-            <div id="viz5"></div>
-        </section> -->
-
-        <!-- Row 4: Rating Distribution + Scatter -->
-        <!-- <section class="viz-section half-width">
-            <h2>Labour Market Rating Distribution</h2>
-            <div id="viz6"></div>
-        </section> -->
-        <!-- <section class="viz-section half-width">
-            <h2>Retail vs Unemployment Relationship</h2>
-            <div id="viz7"></div>
-        </section> -->
 
         <!-- Row 5: Top 10 Industries -->
         <section class="viz-section full-width">
@@ -63,399 +54,34 @@
             <h2>Australia SA4 Unemployment Rate Map (June 2025)</h2>
             <div id="viz9"></div>
         </section>
+
+                <section class="viz-section half-width">
+            <h2>Retail vs Unemployment Relationship</h2>
+            <div id="viz7"></div>
+        </section>
+
+
+
+        <!-- Use heatmap for this concept -->
+        <!-- <section class="viz-section half-width">
+            <h2>Top Industries by State</h2>
+            <div id="viz3"></div>
+        </section> -->
+
+
+        <!-- Row 4: Rating Distribution + Scatter -->
+        <!-- <section class="viz-section half-width">
+            <h2>Labour Market Rating Distribution</h2>
+            <div id="viz6"></div>
+        </section> -->
+
     </main>
 
-    <footer>
+    <!-- <footer>
         <p>Data sources: Australian Bureau of Statistics</p>
-    </footer>
+    </footer> -->
 
     <script>
-        // Visualization 1: State Total Turnover Timeline
-        const spec1 = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "width": 1000,
-            "height": 400,
-            "data": {"url": "data/retail_tidy.csv"},
-            "transform": [
-                {"filter": "datum.industry == 'Total (Industry)'"},
-                {"filter": "datum.state != 'Total (State)'"}
-            ],
-            "mark": {"type": "line", "point": false, "strokeWidth": 2},
-            "encoding": {
-                "x": {
-                    "field": "date",
-                    "type": "temporal",
-                    "title": "Date",
-                    "axis": {"format": "%Y"}
-                },
-                "y": {
-                    "field": "turnover",
-                    "type": "quantitative",
-                    "title": "Log Turnover ($ Millions)",
-                    "scale": {"type": "log"}
-                },
-                "color": {
-                    "field": "state",
-                    "type": "nominal",
-                    "title": "State",
-                    "scale": {"scheme": "category10"}
-                },
-                "tooltip": [
-                    {"field": "state", "type": "nominal", "title": "State"},
-                    {"field": "date", "type": "temporal", "title": "Date", "format": "%b %Y"},
-                    {"field": "turnover", "type": "quantitative", "title": "Turnover ($M)", "format": ",.0f"}
-                ]
-            }
-        };
-
-        // Visualization 2: YoY Growth Rate Timeline
-        const spec2 = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "width": 450,
-            "height": 300,
-            "data": {"url": "data/retail_tidy.csv"},
-            "transform": [
-                {"filter": "datum.industry == 'Total (Industry)'"},
-                {"filter": "datum.yoy_pct != null"},
-                {"filter": "datum.state == 'Total (State)'"}
-            ],
-            "mark": {"type": "line", "strokeWidth": 2, "color": "#4682b4"},
-            "encoding": {
-                "x": {
-                    "field": "date",
-                    "type": "temporal",
-                    "title": "Date",
-                    "axis": {"format": "%Y"}
-                },
-                "y": {
-                    "field": "yoy_pct",
-                    "type": "quantitative",
-                    "title": "Year-over-Year Growth (%)"
-                },
-                "tooltip": [
-                    {"field": "date", "type": "temporal", "title": "Date", "format": "%b %Y"},
-                    {"field": "yoy_pct", "type": "quantitative", "title": "YoY Growth (%)", "format": ".1f"}
-                ]
-            }
-        };
-
-        // Visualization 3: Top Industries Small Multiples
-        const spec3 = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "width": 120,
-            "height": 80,
-            "data": {"url": "data/retail_latest_top10.csv"},
-            "mark": "bar",
-            "encoding": {
-                "x": {
-                    "field": "state",
-                    "type": "nominal",
-                    "title": null,
-                    "axis": {"labelAngle": -45}
-                },
-                "y": {
-                    "field": "turnover",
-                    "type": "quantitative",
-                    "title": "Turnover ($M)"
-                },
-                "color": {
-                    "field": "state",
-                    "type": "nominal",
-                    "legend": null,
-                    "scale": {"scheme": "category10"}
-                },
-                "facet": {
-                    "field": "industry",
-                    "type": "nominal",
-                    "columns": 4,
-                    "title": null
-                },
-                "tooltip": [
-                    {"field": "industry", "type": "nominal"},
-                    {"field": "state", "type": "nominal"},
-                    {"field": "turnover", "type": "quantitative", "format": ",.0f"}
-                ]
-            }
-        };
-
-        // Visualization 4: Monthly Seasonality
-        const spec4 = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "width": 450,
-            "height": 300,
-            "data": {"url": "data/monthly_seasonality.csv"},
-            "transform": [
-                {"filter": "datum.state != 'Total (State)'"}
-            ],
-            "mark": {"type": "line", "point": true},
-            "encoding": {
-                "x": {
-                    "field": "month",
-                    "type": "ordinal",
-                    "title": "Month",
-                    "axis": {"labelExpr": "['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][datum.value - 1]"}
-                },
-                "y": {
-                    "field": "turnover",
-                    "type": "quantitative",
-                    "title": "Average Turnover ($M, Log Scale)",
-                    "scale": {"type": "log"}
-                },
-                "color": {
-                    "field": "state",
-                    "type": "nominal",
-                    "title": "State",
-                    "scale": {"scheme": "category10"}
-                },
-                "tooltip": [
-                    {"field": "state", "type": "nominal"},
-                    {"field": "month_name", "type": "nominal", "title": "Month"},
-                    {"field": "turnover", "type": "quantitative", "title": "Avg Turnover ($M)", "format": ",.0f"}
-                ]
-            }
-        };
-
-        // Visualization 5: Unemployment Choropleth Map (simplified dot map due to lack of geojson)
-        const spec5 = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "width": 450,
-            "height": 300,
-            "data": {"url": "data/labour_unemp_tidy.csv"},
-            "mark": {"type": "circle", "size": 100},
-            "encoding": {
-                "y": {
-                    "field": "SA4_Name",
-                    "type": "nominal",
-                    "title": "SA4 Region",
-                    "axis": {"labelLimit": 200},
-                    "sort": {"field": "Unemployment_Rate", "order": "descending"}
-                },
-                "x": {
-                    "field": "Unemployment_Rate",
-                    "type": "quantitative",
-                    "title": "Unemployment Rate (%)"
-                },
-                "color": {
-                    "field": "Unemployment_Rate",
-                    "type": "quantitative",
-                    "title": "Unemployment Rate (%)",
-                    "scale": {"scheme": "reds"}
-                },
-                "tooltip": [
-                    {"field": "SA4_Name", "type": "nominal", "title": "Region"},
-                    {"field": "Unemployment_Rate", "type": "quantitative", "title": "Unemployment Rate (%)", "format": ".1f"},
-                    {"field": "Rating", "type": "nominal", "title": "Labour Market Rating"}
-                ]
-            }
-        };
-
-        // Visualization 6: Rating Distribution Bar Chart
-        const spec6 = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "width": 450,
-            "height": 300,
-            "data": {"url": "data/rating_distribution.csv"},
-            "mark": {"type": "bar", "color": "#4682b4"},
-            "encoding": {
-                "x": {
-                    "field": "rating",
-                    "type": "nominal",
-                    "title": "Labour Market Rating",
-                    "axis": {"labelAngle": -30}
-                },
-                "y": {
-                    "field": "count",
-                    "type": "quantitative",
-                    "title": "Number of SA4 Regions"
-                },
-                "tooltip": [
-                    {"field": "rating", "type": "nominal", "title": "Rating"},
-                    {"field": "count", "type": "quantitative", "title": "Regions"}
-                ]
-            }
-        };
-
-        // Visualization 7: Scatter Plot (Retail vs Unemployment)
-        const spec7 = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "width": 450,
-            "height": 300,
-            "data": {"url": "data/scatter_retail_unemp.csv"},
-            "mark": {"type": "point", "filled": true, "size": 200},
-            "encoding": {
-                "x": {
-                    "field": "unemployment_rate",
-                    "type": "quantitative",
-                    "title": "Average Unemployment Rate (%)"
-                },
-                "y": {
-                    "field": "retail_turnover",
-                    "type": "quantitative",
-                    "title": "Retail Turnover ($M)"
-                },
-                "color": {
-                    "field": "state",
-                    "type": "nominal",
-                    "title": "State",
-                    "scale": {"scheme": "category10"}
-                },
-                "tooltip": [
-                    {"field": "state", "type": "nominal", "title": "State"},
-                    {"field": "unemployment_rate", "type": "quantitative", "title": "Unemployment Rate (%)", "format": ".1f"},
-                    {"field": "retail_turnover", "type": "quantitative", "title": "Retail Turnover ($M)", "format": ",.0f"}
-                ]
-            }
-        };
-
-        // Visualization 8: Top 10 Industries Bar Chart
-        const spec8 = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "width": 1000,
-            "height": 400,
-            "data": {"url": "data/retail_latest_top10.csv"},
-            "transform": [
-            {
-                "aggregate": [{"op": "sum", "field": "turnover", "as": "total_turnover"}],
-                "groupby": ["industry"]
-            },
-            {
-                "window": [{"op": "rank", "as": "rank"}],
-                "sort": [{"field": "total_turnover", "order": "descending"}]
-            },
-            {"filter": "datum.rank <= 10"},
-            {"filter": "datum.industry != 'Total (Industry)'"},
-            // {"filter": "datum.state != 'Total (State)'"}
-            ],
-            "mark": {"type": "bar", "color": "#4682b4"},
-            "encoding": {
-                "x": {
-                    "field": "total_turnover",
-                    "type": "quantitative",
-                    "title": "Total Turnover ($ Millions)"
-                },
-                "y": {
-                    "field": "industry",
-                    "type": "nominal",
-                    "title": "Industry",
-                    "sort": "-x"
-                },
-                "tooltip": [
-                    {"field": "industry", "type": "nominal", "title": "Industry"},
-                    {"field": "total_turnover", "type": "quantitative", "title": "Total Turnover ($M)", "format": ",.0f"}
-                ]
-            }
-        };
-
-        // Visualization 9: Australia SA4 Unemployment Choropleth Map
-        const spec9 = {
-            "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-            "width": 800,
-            "height": 600,
-            "title": "Australia SA4 Unemployment Rate (June 2025)",
-            "projection": {
-                "type": "mercator",
-                "center": [135, -28],
-                "scale": 800
-            },
-            "layer": [
-                {
-                    "data": {
-                        "url": "data/australia_regions.json",
-                        "format": {
-                            "type": "topojson",
-                            "feature": "SA4_2021_AUST_GDA2020"
-                        }
-                    },
-                    "mark": {
-                        "type": "geoshape",
-                        "fill": "gray",
-                        "stroke": "white",
-                        "strokeWidth": 0.5
-                    },
-                    "encoding": {
-                        "tooltip": [{
-                            "field": "properties.SA4_NAME21",
-                            "type": "nominal",
-                            "title": "Region (No Data)"
-                        }]
-                    }
-                },
-                {
-                    "data": {
-                        "url": "data/australia_regions.json",
-                        "format": {
-                            "type": "topojson",
-                            "feature": "SA4_2021_AUST_GDA2020"
-                        }
-                    },
-                    "transform": [
-                        {
-                            "lookup": "properties.SA4_CODE21",
-                            "from": {
-                                "data": {
-                                    "url": "data/labour_unemp_tidy.csv"
-                                },
-                                "key": "SA4_Code",
-                                "fields": [
-                                    "SA4_Name",
-                                    "Rating",
-                                    "Working_Age_Employment_Rate",
-                                    "Unemployment_Rate"
-                                ]
-                            }
-                        },
-                        {
-                            "filter": "datum.Unemployment_Rate != null"
-                        }
-                    ],
-                    "mark": {
-                        "type": "geoshape",
-                        "stroke": "black",
-                        "strokeWidth": 0.5
-                    },
-                    "encoding": {
-                        "color": {
-                            "field": "Unemployment_Rate",
-                            "type": "quantitative",
-                            "scale": {
-                                "type": "threshold",
-                                "domain": [3.0, 4.0, 5.0],
-                                "range": ["#fc9272", "#fcbba1", "#fee0d2", "#fff5f0"]
-                            },
-                            "legend": {
-                                "title": "Unemployment Rate (%)",
-                                "format": ".1f"
-                            }
-                        },
-                        "tooltip": [
-                            {
-                                "field": "SA4_Name",
-                                "type": "nominal",
-                                "title": "Region"
-                            },
-                            {
-                                "field": "Unemployment_Rate",
-                                "type": "quantitative",
-                                "title": "Unemployment Rate (%)",
-                                "format": ".1f"
-                            },
-                            {
-                                "field": "Working_Age_Employment_Rate",
-                                "type": "quantitative",
-                                "title": "Employment Rate (%)",
-                                "format": ".1f"
-                            },
-                            {
-                                "field": "Rating",
-                                "type": "nominal",
-                                "title": "Labour Market Rating"
-                            }
-                        ]
-                    }
-                }
-            ]
-        };
-
         // Embed all visualizations
         vegaEmbed('#viz1', spec1, {actions: false});
         vegaEmbed('#viz2', spec2, {actions: false});
