@@ -45,7 +45,7 @@ const spec8 = {
         },
         "color": {
             "condition": {
-                "test": "datum.rank <= 3",
+                "test": "datum.rank <= 2",
                 "value": "#4682b4"
             },
             "value": "#cccccc"

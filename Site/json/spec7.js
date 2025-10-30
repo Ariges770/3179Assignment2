@@ -2,7 +2,7 @@
 const spec7 = {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 450,
-    "height": 300,
+    "height": 450,
     "data": {"url": "data/scatter_retail_unemp.csv"},
     "transform": [
         {"calculate": "log(datum.retail_turnover)", "as": "retail_turnover_log"}

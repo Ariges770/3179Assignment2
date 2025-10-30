@@ -53,6 +53,11 @@ main {
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
+.viz-section p {
+    margin: 0.5rem;
+    align-items: center;
+}
+
 .viz-section:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 16px rgba(0,0,0,0.12);
@@ -156,11 +161,12 @@ main {
 }
 
 /* Center visualization containers */
-.viz-section > div:not(.chart-grid) {
+.viz-section > div:not(.chart-grid, .analysis-content) {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 
 /* Vega-Lite Canvas Centering */
 .viz-section canvas {
@@ -169,7 +175,7 @@ main {
 }
 
 /* Fix tooltip positioning */
-.test-map .vega-embed {
+vega-embed {
     position: relative;
     z-index: 1;
 }
@@ -191,6 +197,10 @@ footer {
 footer p {
     font-size: 0.9rem;
     opacity: 0.9;
+}
+
+footer a:link {
+    color: cadetblue;
 }
 
 /* Mobile Responsive */

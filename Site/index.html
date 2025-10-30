@@ -23,6 +23,7 @@
     <header>
         <h1>Australian Retail Trade & Labour Market Analysis</h1>
         <p class="subtitle">Visualizing retail turnover trends (1982-2025) and employment indicators across states and regions</p>
+        <p class="subtitle">Ari Gestetner</p>
     </header>
 
     <main>
@@ -32,56 +33,79 @@
             <div id="viz1"></div>
         </section>
 
-        <!-- Row 2: YoY Growth + Industry Multiples -->
-        <section class="viz-section half-width">
-            <h2>Year-over-Year Growth Rate</h2>
-            <div id="viz2"></div>
+        <!-- Analysis 1 -->
+        <section class="viz-section full-width">
+            <h2>Analysis of Retail Turnover (1)</h2>
+            <div class="analysis-content">
+                <p>When looking at the various series over time on the log scale, we can see that every series has an <strong>upward trend</strong>. Additionally, we can also see that the differences between the series remains somewhat constant, indicating that each series <strong>increase by similar percentage</strong> each year. Although, South Australia and Western Australia start off with nearly identical turnover, however, the difference between the two increases each year.</p>
+            </div>
         </section>
-
+        
         <section class="viz-section half-width">
             <h2>Average Monthly Turnover by State</h2>
             <div id="viz4"></div>
         </section>
 
+        <!-- Analysis 2 -->
+        <section class="viz-section half-width">
+            <h2>Analysis of Retail Turnover (2)</h2>
+            <div class="analysis-content">
+                <p>Furthermore, we can note yearly <strong>seasonality</strong> in the series, where December and January have <strong>increased</strong> turnover, whereas, February has a <strong>decrease</strong> from the previous 2 months.</p>
+                <p>Lastly, when we look at the year over year growth rate, we can notice that during <strong>Covid</strong>, there is the <strong>largest drop</strong> in Turnover, likely due to lockdowns. Furthermore, we can also note that during the global financial crisis (<strong>GFC</strong>), the market still trended <strong>upwards</strong>, indicating good economic policy, whilst the rest of the world was having many economic struggles. This is an anomaly for market downturns as well, as we can see that during the 1990's crash and the end of the dot com bubble, <strong>both times led to negative turnover growth, whereas, the GFC did not</strong>.</p>
+            </div>
+        </section>
+        
+
+        <!-- Row 2: YoY Growth + Industry Multiples -->
+        <section class="viz-section full-width">
+            <h2>Month-on-Month Growth (%)</h2>
+            <div id="viz2"></div>
+        </section>
+
         <!-- Row 6: Australia Unemployment Choropleth Map + Top Industries -->
         <section class="viz-section full-width map-with-chart">
             <div class="chart-grid">
-                <div class="test-map">
-                    
+                <div>
                     <div class="map-container">
-                        <h2>Australia SA4 Unemployment Rate Map (June 2025)</h2>
+                        <h2>Australia Unemployment Rate Map (June 2025)</h2>
                         <div id="viz9"></div>
                     </div>
                 </div>
                 <div class="bar-container">
-                    <h2>Top Industries by Turnover</h2>
+                    <h2>Top Industries by Turnover (June - 2025)</h2>
                     <div id="viz8"></div>
                 </div>
             </div>
         </section>
     
 
-
-
-
-        <!-- Use heatmap for this concept -->
-        <!-- <section class="viz-section half-width">
-            <h2>Top Industries by State</h2>
-            <div id="viz3"></div>
-        </section> -->
-
-
+        
+        
         <!-- Row 4: Rating Distribution + Scatter -->
         <section class="viz-section half-width">
             <h2>Retail Turnover vs Unemployment Rate</h2>
             <div id="viz7"></div>
         </section>
 
+        <!-- Analysis 3 -->
+        <section class="viz-section half-width">
+            <h2>Analysis of Unemployment and Turnover</h2>
+            <div class="analysis-content">
+                <p>When we look at the unemployment map divided into SA4 regions, we can make a number of observations. However, Statistical Areas Level 4 (<strong>SA4</strong>) are "the largest sub-State [geographical] regions in the Main Structure of the Australian Statistical Geography Standard. [...] These areas represent labour markets or groups of labour markets within each State and Territory" (<a href="https://www.abs.gov.au/ausstats/abs@.nsf/Lookup/by%20Subject/1270.0.55.001~July%202016~Main%20Features~Statistical%20Area%20Level%204%20(SA4)~10016#:~:text=Statistical%20Areas%20Level%204%20(SA4,for%20each%20State%20and%20Territory.)">ABS</a>).</p>
+
+                <p>One of the main observations, when you look at each state, the regions around the main cities seem to have <strong>higher unemployment</strong> than the less populated regions. For example, when looking at NSW, we can see that the areas around Sydney and along the Northern coast line have worst unemployment than the more mainland areas). The exception to this, are the outback areas, which have high unemployment as well.</p>
+
+                <p>When we look at the top industries by turnover, we can see that <strong>food retail and supermarket and grocery stores dominate</strong> the turnover for every state. However, from 3rd largest and onwards vary state to state.</p>
+
+                <p>Lastly, when we look at the retail turnover to unemployment rate scatterplot, we can see a <strong>negative correlation</strong> between turnover and unemployment rate (<strong>higher turnover is lower unemployment</strong>). Queensland is an exception to this, however, this may be due to high tourism in Queensland.</p>
+            </div>
+        </section>
 
     </main>
 
     <footer>
-        <p>Data sources: Australian Bureau of Statistics</p>
+        <p>Data sources: <a href="https://www.abs.gov.au/methodologies/retail-trade-australia-methodology/jun-2025">Australian Bureau of Statistics</a> and <a href="https://www.jobsandskills.gov.au/data/regional-labour-market-indicator">Jobs and Skills Australia</a></p>
+        <p>VS Code Copilot was used for this project, using models GPT 4.1 and Grok Code Fast 1</p>
     </footer>
 
     <script>

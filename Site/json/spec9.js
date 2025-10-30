@@ -3,7 +3,7 @@ const spec9 = {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": "container",
     "height": 600,
-    "title": "Australia SA4 Unemployment Rate (June 2025)",
+    // "title": "Australia Unemployment Rate (June 2025)",
     "params": [
         {
             "name": "zoomLevel",
