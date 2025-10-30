@@ -88,6 +88,15 @@ main {
     align-items: start;
 }
 
+.test-map {
+    position: relative;
+    overflow: hidden;
+}
+
+.test-map .map-container > div {
+    position: relative;
+}
+
 .map-container,
 .bar-container {
     display: flex;
@@ -157,6 +166,17 @@ main {
 .viz-section canvas {
     max-width: 100%;
     height: auto;
+}
+
+/* Fix tooltip positioning */
+.test-map .vega-embed {
+    position: relative;
+    z-index: 1;
+}
+
+.vega-embed .vega-tooltip {
+    position: absolute !important;
+    z-index: 9999 !important;
 }
 
 /* Footer */

@@ -1,7 +1,7 @@
 // Visualization 9: Australia SA4 Unemployment Choropleth Map
 const spec9 = {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 800,
+    "width": "container",
     "height": 600,
     "title": "Australia SA4 Unemployment Rate (June 2025)",
     "params": [
