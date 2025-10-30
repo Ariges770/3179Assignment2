@@ -30,8 +30,7 @@ const spec9 = {
         "center": {"expr": "zoomLevel == 'Australia' ? [135, -28] : zoomLevel == 'New South Wales' ? [147, -33] : zoomLevel == 'Victoria' ? [145, -37.5] : zoomLevel == 'Queensland' ? [145, -20] : zoomLevel == 'South Australia' ? [137, -32.5] : zoomLevel == 'Western Australia' ? [118, -32] : zoomLevel == 'Tasmania' ? [147, -43] : zoomLevel == 'Northern Territory' ? [133, -19] : zoomLevel == 'Australian Capital Territory' ? [149, -35.5] : [135, -28]"},
         "scale": {"expr": "zoomLevel == 'Australia' ? 800 : zoomLevel == 'New South Wales' ? 3000 : zoomLevel == 'Victoria' ? 3500 : zoomLevel == 'Queensland' ? 1500 : zoomLevel == 'Western Australia' ? 2800 : zoomLevel == 'Tasmania' ? 2800 : zoomLevel == 'Australian Capital Territory' ? 9000 : 2000"}
     },
-    "layer": [
-        
+    "layer": [ 
         {
             "data": {
                 "url": "data/state_sa4.json",
@@ -140,6 +139,28 @@ const spec9 = {
                 "fill": "null",
                 "stroke": "black",
                 "strokeWidth": 1
+            }
+        },
+        {
+            "data": {
+                "url": "data/state_sa4.json",
+                "format": {
+                    "type": "topojson",
+                    "feature": "SA4_2021_AUST_GDA2020"
+                }
+            },
+            "mark": {
+                "type": "geoshape",
+                "fill": "null",
+                "stroke": "black",
+                "strokeWidth": 0.1
+            },
+            "encoding": {
+                "tooltip": [{
+                    "field": "properties.SA4_NAME21",
+                    "type": "nominal",
+                    "title": "Region (No Data)"
+                }]
             }
         },
         {
