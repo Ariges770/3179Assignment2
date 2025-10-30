@@ -7,7 +7,7 @@ const spec9 = {
     "params": [
         {
             "name": "zoomLevel",
-            "value": "New South Wales",
+            "value": "Australia",
             "bind": {
                 "input": "select",
                 "options": [
@@ -44,7 +44,7 @@ const spec9 = {
                 "type": "geoshape",
                 "fill": "gray",
                 "stroke": "black",
-                "strokeWidth": 0.5
+                "strokeWidth": 0.1
             },
             "encoding": {
                 "tooltip": [{
@@ -85,7 +85,7 @@ const spec9 = {
             "mark": {
                 "type": "geoshape",
                 "stroke": "black",
-                "strokeWidth": 0.5
+                "strokeWidth": 0.1
             },
             "encoding": {
                 "color": {
@@ -139,7 +139,7 @@ const spec9 = {
                 "type": "geoshape",
                 "fill": "null",
                 "stroke": "black",
-                "strokeWidth": 2
+                "strokeWidth": 1
             }
         },
         {
