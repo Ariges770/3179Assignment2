@@ -16,6 +16,7 @@
     <script src="json/spec7.js"></script>
     <script src="json/spec8.js"></script>
     <script src="json/spec9.js"></script>
+    <script src="json/test_multi.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -42,23 +43,18 @@
             <div id="viz4"></div>
         </section>
 
-        <!-- Row 5: Top 10 Industries -->
-        <section class="viz-section full-width">
-            <h2>Top 10 Industries by Turnover (Latest Month)</h2>
-            <div id="viz8"></div>
-        </section>
-
         <!-- Row 6: Australia Unemployment Choropleth Map -->
         <section class="viz-section full-width">
             <h2>Australia SA4 Unemployment Rate Map (June 2025)</h2>
             <div id="viz9"></div>
         </section>
-        
-        <!-- Row 5: Top 10 Industries -->
+
+        <!-- Row 5: Top 15 Industries in Australia -->
         <section class="viz-section full-width">
-            <h2>Top 10 Industries by Turnover (Latest Month)</h2>
+            <h2>Top 15 Industries by Turnover in Australia (June 2025)</h2>
             <div id="viz8"></div>
         </section>
+    
 
 
 
@@ -76,6 +72,7 @@
             <div id="viz7"></div>
         </section>
 
+
     </main>
 
     <!-- <footer>
@@ -86,11 +83,12 @@
         // Embed all visualizations
         vegaEmbed('#viz1', spec1, {actions: false});
         vegaEmbed('#viz2', spec2, {actions: false});
-        vegaEmbed('#viz3', spec3, {actions: false});
         vegaEmbed('#viz4', spec4, {actions: false});
-        vegaEmbed('#viz5', spec5, {actions: false});
-        vegaEmbed('#viz6', spec6, {actions: false});
         vegaEmbed('#viz7', spec7, {actions: false});
+        
+        // Create parameter links between map and charts
+        const paramLinks = {};
+        
         vegaEmbed('#viz9', spec9, {actions: false}).then(function(result) {
             // Move parameter controls to bottom after embedding
             const vizContainer = document.getElementById('viz9');
@@ -108,8 +106,36 @@
                     chartContainer.style.order = '1';
                 }
             }
+            
+            // Store reference to map view for parameter linking
+            paramLinks.mapView = result.view;
+            
+            // Now that map is loaded, set up parameter linking for industries chart
+            if (paramLinks.industriesView) {
+                // Listen for changes in the map's zoomLevel parameter
+                paramLinks.mapView.addSignalListener('zoomLevel', function(name, value) {
+                    // Update the industries chart with the new zoom level value
+                    paramLinks.industriesView.signal('zoomLevel', value).run();
+                });
+            }
         });
-        vegaEmbed('#viz8', spec8, {actions: false});
+        
+        vegaEmbed('#viz8', spec8, {actions: false}).then(function(result) {
+            console.log('Industries chart loaded successfully');
+            // Store reference to industries chart view
+            paramLinks.industriesView = result.view;
+
+            // Set up parameter linking for industries chart (if map is already loaded)
+            if (paramLinks.mapView) {
+                // Listen for changes in the map's zoomLevel parameter
+                paramLinks.mapView.addSignalListener('zoomLevel', function(name, value) {
+                    // Update the industries chart with the new zoom level value
+                    paramLinks.industriesView.signal('zoomLevel', value).run();
+                });
+            }
+        }).catch(function(error) {
+            console.error('Error loading industries chart:', error);
+        });
     </script>
 </body>
 </html>
