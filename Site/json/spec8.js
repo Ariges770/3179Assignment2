@@ -30,7 +30,7 @@ const spec8 = {
         },
         {"filter": "datum.rank <= 10"}
     ],
-    "mark": {"type": "bar", "color": "#4682b4"},
+    "mark": {"type": "bar"},
     "encoding": {
         "x": {
             "field": "total_turnover",
@@ -42,6 +42,13 @@ const spec8 = {
             "type": "nominal",
             "title": "Industry",
             "sort": "-x"
+        },
+        "color": {
+            "condition": {
+                "test": "datum.rank <= 3",
+                "value": "#4682b4"
+            },
+            "value": "#cccccc"
         },
         "tooltip": [
             {"field": "industry", "type": "nominal", "title": "Industry"},
