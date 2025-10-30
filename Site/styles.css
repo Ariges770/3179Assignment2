@@ -76,6 +76,69 @@ main {
     grid-column: span 1;
 }
 
+/* Side-by-side Map and Chart Layout */
+.map-with-chart {
+    padding: 1rem;
+}
+
+.map-with-chart > .chart-grid {
+    display: grid;
+    grid-template-columns: 6fr 3fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.map-container,
+.bar-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.map-container h2,
+.bar-container h2 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: 600;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 0.5rem;
+    flex-shrink: 0;
+}
+
+.bar-container h2 {
+    font-size: 1.1rem;
+}
+
+.map-container > div {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+}
+
+.bar-container > div {
+    flex: 1;
+    height: 600px;
+}
+
+/* Responsive: stack vertically on smaller screens */
+@media (max-width: 1200px) {
+    .map-with-chart > .chart-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .map-container,
+    .bar-container {
+        order: 0;
+    }
+    
+    .map-container {
+        order: 1;
+    }
+}
+
 /* Responsive Grid for Larger Screens */
 @media (min-width: 1024px) {
     main {
@@ -84,7 +147,7 @@ main {
 }
 
 /* Center visualization containers */
-.viz-section > div {
+.viz-section > div:not(.chart-grid) {
     display: flex;
     justify-content: center;
     align-items: center;

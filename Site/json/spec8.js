@@ -1,9 +1,13 @@
-// Visualization 8: Top 15 Industries by State Bar Chart
+// Visualization 8: Top 5 Industries by State Bar Chart
 const spec8 = {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": "container",
     "height": 600,
-    "title": {"expr": "zoomLevel == 'Australia' ? 'Top 15 Industries by Turnover in Australia (June 2025)' : 'Top 15 Industries by Turnover in ' + zoomLevel + ' (June 2025)'"},
+    "autosize": {
+        "type": "fit",
+        "contains": "padding"
+    },
+    "title": {"expr": "zoomLevel == 'Australia' ? 'Australia Top 5' : zoomLevel + ' Top 5'"},
     "params": [
         {
             "name": "zoomLevel",
@@ -24,7 +28,7 @@ const spec8 = {
             "window": [{"op": "rank", "as": "rank"}],
             "sort": [{"field": "total_turnover", "order": "descending"}]
         },
-        {"filter": "datum.rank <= 15"}
+        {"filter": "datum.rank <= 10"}
     ],
     "mark": {"type": "bar", "color": "#4682b4"},
     "encoding": {
