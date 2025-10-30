@@ -7,19 +7,19 @@ const spec9 = {
     "params": [
         {
             "name": "zoomLevel",
-            "value": "Australia",
+            "value": "New South Wales",
             "bind": {
                 "input": "select",
                 "options": [
                     "Australia",
+                    "Australian Capital Territory",
                     "New South Wales",
+                    "Northern Territory",
                     "Victoria",
                     "Queensland",
                     "South Australia",
-                    "Western Australia",
                     "Tasmania",
-                    "Northern Territory",
-                    "Australian Capital Territory"
+                    "Western Australia"
                 ],
                 "name": "Zoom to: "
             }
@@ -27,13 +27,14 @@ const spec9 = {
     ],
     "projection": {
         "type": "mercator",
-        "center": {"expr": "zoomLevel == 'Australia' ? [135, -28] : zoomLevel == 'New South Wales' ? [145, -33] : zoomLevel == 'Victoria' ? [145, -37.5] : zoomLevel == 'Queensland' ? [145, -20] : zoomLevel == 'South Australia' ? [137, -32.5] : zoomLevel == 'Western Australia' ? [118, -32] : zoomLevel == 'Tasmania' ? [147, -43] : zoomLevel == 'Northern Territory' ? [133, -19] : zoomLevel == 'Australian Capital Territory' ? [149, -35.5] : [135, -28]"},
-        "scale": {"expr": "zoomLevel == 'Australia' ? 800 : zoomLevel == 'New South Wales' ? 2500 : zoomLevel == 'Victoria' ? 3500 : zoomLevel == 'Queensland' ? 1500 : zoomLevel == 'Western Australia' ? 2800 : zoomLevel == 'Tasmania' ? 2800 : zoomLevel == 'Australian Capital Territory' ? 9000 : 2000"}
+        "center": {"expr": "zoomLevel == 'Australia' ? [135, -28] : zoomLevel == 'New South Wales' ? [147, -33] : zoomLevel == 'Victoria' ? [145, -37.5] : zoomLevel == 'Queensland' ? [145, -20] : zoomLevel == 'South Australia' ? [137, -32.5] : zoomLevel == 'Western Australia' ? [118, -32] : zoomLevel == 'Tasmania' ? [147, -43] : zoomLevel == 'Northern Territory' ? [133, -19] : zoomLevel == 'Australian Capital Territory' ? [149, -35.5] : [135, -28]"},
+        "scale": {"expr": "zoomLevel == 'Australia' ? 800 : zoomLevel == 'New South Wales' ? 3000 : zoomLevel == 'Victoria' ? 3500 : zoomLevel == 'Queensland' ? 1500 : zoomLevel == 'Western Australia' ? 2800 : zoomLevel == 'Tasmania' ? 2800 : zoomLevel == 'Australian Capital Territory' ? 9000 : 2000"}
     },
     "layer": [
+        
         {
             "data": {
-                "url": "data/australia_regions.json",
+                "url": "data/state_sa4.json",
                 "format": {
                     "type": "topojson",
                     "feature": "SA4_2021_AUST_GDA2020"
@@ -42,7 +43,7 @@ const spec9 = {
             "mark": {
                 "type": "geoshape",
                 "fill": "gray",
-                "stroke": "white",
+                "stroke": "black",
                 "strokeWidth": 0.5
             },
             "encoding": {
@@ -55,7 +56,7 @@ const spec9 = {
         },
         {
             "data": {
-                "url": "data/australia_regions.json",
+                "url": "data/state_sa4.json",
                 "format": {
                     "type": "topojson",
                     "feature": "SA4_2021_AUST_GDA2020"
@@ -125,6 +126,95 @@ const spec9 = {
                     }
                 ]
             }
-        }
+        },
+        {
+            "data": {
+                "url": "data/state_sa4.json",
+                "format": {
+                    "type": "topojson",
+                    "feature": "STE_2021_AUST_GDA2020"
+                }
+            },
+            "mark": {
+                "type": "geoshape",
+                "fill": "null",
+                "stroke": "black",
+                "strokeWidth": 2
+            }
+        },
+        {
+            "data": {
+                "url": "data/state_sa4.json",
+                "format": {
+                    "type": "topojson",
+                    "feature": "SA4_2021_AUST_GDA2020"
+                }
+            },
+            "transform": [
+                {
+                    "lookup": "properties.SA4_CODE21",
+                    "from": {
+                        "data": {
+                            "url": "data/labour_unemp_tidy.csv"
+                        },
+                        "key": "SA4_Code",
+                        "fields": [
+                            "SA4_Name",
+                            "Rating",
+                            "Working_Age_Employment_Rate",
+                            "Unemployment_Rate"
+                        ]
+                    }
+                },
+                {
+                    "filter": "datum.Unemployment_Rate != null"
+                }
+            ],
+            "mark": {
+                "type": "geoshape",
+                "fill": "null",
+                "stroke": "null",
+                "strokeWidth": 0
+            },
+            "encoding": {
+                "color": {
+                    "field": "Unemployment_Rate",
+                    "type": "quantitative",
+                    "scale": {
+                        "type": "threshold",
+                        "domain": [3.0, 4.0, 5.0],
+                        "range": ["#fc9272", "#fcbba1", "#fee0d2", "#fff5f0"]
+                    },
+                    "legend": {
+                        "title": "Unemployment Rate (%)",
+                        "format": ".1f"
+                    }
+                },
+                "tooltip": [
+                    {
+                        "field": "SA4_Name",
+                        "type": "nominal",
+                        "title": "Region"
+                    },
+                    {
+                        "field": "Unemployment_Rate",
+                        "type": "quantitative",
+                        "title": "Unemployment Rate (%)",
+                        "format": ".1f"
+                    },
+                    {
+                        "field": "Working_Age_Employment_Rate",
+                        "type": "quantitative",
+                        "title": "Employment Rate (%)",
+                        "format": ".1f"
+                    },
+                    {
+                        "field": "Rating",
+                        "type": "nominal",
+                        "title": "Labour Market Rating"
+                    }
+                ]
+            }
+        },
     ]
 };
