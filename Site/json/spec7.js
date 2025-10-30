@@ -4,6 +4,9 @@ const spec7 = {
     "width": 450,
     "height": 300,
     "data": {"url": "data/scatter_retail_unemp.csv"},
+    "transform": [
+        {"calculate": "log(datum.retail_turnover)", "as": "retail_turnover_log"}
+    ],
     "mark": {"type": "point", "filled": true, "size": 200},
     "encoding": {
         "x": {
@@ -14,8 +17,8 @@ const spec7 = {
         "y": {
             "field": "retail_turnover",
             "type": "quantitative",
-            "title": "Retail Turnover ($M)",
-            // "scale": {"type": "log"}
+            "title": "Retail Turnover ($M, Log Scale)",
+            "scale": {"type": "log"}
         },
         "color": {
             "field": "state",
@@ -26,7 +29,8 @@ const spec7 = {
         "tooltip": [
             {"field": "state", "type": "nominal", "title": "State"},
             {"field": "unemployment_rate", "type": "quantitative", "title": "Unemployment Rate (%)", "format": ".1f"},
-            {"field": "retail_turnover", "type": "quantitative", "title": "Retail Turnover ($M)", "format": ",.0f"}
+            {"field": "retail_turnover", "type": "quantitative", "title": "Retail Turnover ($M)", "format": ",.0f"},
+            {"field": "retail_turnover_log", "type": "quantitative", "title": "Retail Turnover (Log)", "format": ".2f"}
         ]
     }
 };
