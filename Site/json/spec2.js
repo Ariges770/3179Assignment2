@@ -67,7 +67,7 @@ const spec2 = {
             },
             "mark": {
                 "type": "rect",
-                "color": "#ffebee",
+                "color": "#c9a454ff",
                 "opacity": 0.3,
                 "stroke": "#f44336",
                 "strokeWidth": 1,

@@ -9,14 +9,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script src="json/spec1.js"></script>
     <script src="json/spec2.js"></script>
-    <script src="json/spec3.js"></script>
     <script src="json/spec4.js"></script>
-    <script src="json/spec5.js"></script>
-    <script src="json/spec6.js"></script>
     <script src="json/spec7.js"></script>
     <script src="json/spec8.js"></script>
     <script src="json/spec9.js"></script>
-    <script src="json/test_multi.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -160,6 +156,37 @@
                 paramLinks.mapView.addSignalListener('zoomLevel', function(name, value) {
                     // Update the industries chart with the new zoom level value
                     paramLinks.industriesView.signal('zoomLevel', value).run();
+                });
+            }
+
+            // Function to update the industries title based on selected state
+            function updateIndustriesTitle(selectedValue) {
+                const stateAbbreviations = {
+                    'Australia': 'Aus',
+                    'Australian Capital Territory': 'ACT',
+                    'New South Wales': 'NSW',
+                    'Northern Territory': 'NT',
+                    'Victoria': 'Vic',
+                    'Queensland': 'Qld',
+                    'South Australia': 'SA',
+                    'Tasmania': 'Tas',
+                    'Western Australia': 'WA'
+                };
+                
+                const abbreviation = stateAbbreviations[selectedValue] || selectedValue;
+                const titleElement = document.querySelector('.bar-container h2');
+                if (titleElement) {
+                    titleElement.textContent = `Top Industries in ${abbreviation} by Turnover (June 2025)`;
+                }
+            }
+
+            // Initial title update
+            updateIndustriesTitle('Australia');
+
+            // Listen for changes to the zoom level and update title
+            if (paramLinks.mapView) {
+                paramLinks.mapView.addSignalListener('zoomLevel', function(name, value) {
+                    updateIndustriesTitle(value);
                 });
             }
         }).catch(function(error) {
